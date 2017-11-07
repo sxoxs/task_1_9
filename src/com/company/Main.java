@@ -7,24 +7,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ArrayList<String> strList = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Выедите последовательно 3 строки");
+        System.out.println("Введите последовательно 3 строки");
         for (int i = 0; i++ < 3;) {
-            strList.add(inConsole());
+            strList.add(br.readLine());
         }
         writeInFile(spliteWord(strList));
         System.out.println("Слова из строк внесены в файл");
     }
 
-    static String inConsole () throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        return br.readLine();
-    }
-
     static void writeInFile (ArrayList<String> arrayStr) throws  IOException{
         try (PrintWriter pw = new PrintWriter("text_1_9.txt")) {
-            for (String i : arrayStr){
-                pw.println(i);
+            for (String line : arrayStr){
+                pw.println(line);
             }
         }
         catch (FileNotFoundException e){
@@ -35,9 +31,9 @@ public class Main {
     static ArrayList<String> spliteWord (ArrayList<String> arrayLine) {
         ArrayList<String> arrayWord = new ArrayList<>();
 
-        for (String i : arrayLine) {
-            for (String j : i.split(" ")){
-                arrayWord.add(j);
+        for (String line : arrayLine) {
+            for (String subLine : line.split(" ")){
+                arrayWord.add(subLine);
             }
         }
         return arrayWord;
